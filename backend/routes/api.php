@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/addCompany',[CompanyController::class,'addCompany']);
 Route::get('/getCompany/{id}',[CompanyController::class,'getCompanyById']);
+
+Route::post('/addProject',[ProjectController::class,'addProject']);
+Route::get('/getProject/{id}',[ProjectController::class,'getProjectById']);
+

@@ -14,4 +14,7 @@ class Company extends Model
         'location',
         'manager_id',
     ];
+
+
+
 }

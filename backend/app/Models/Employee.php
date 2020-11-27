@@ -63,4 +63,12 @@ class Employee extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function projects(){
+        return $this->belongsToMany(
+            Project::class,
+            'projects_employees',
+            'employee_id',
+            'projecy_id');
+    }
 }
