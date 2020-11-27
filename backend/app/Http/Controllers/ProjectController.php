@@ -9,6 +9,8 @@ class ProjectController extends Controller
 {
     //
 
+
+
     public function addProject(Request $request){
         $arr=[
     		'name'=>$request->name,
