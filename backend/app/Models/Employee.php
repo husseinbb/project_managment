@@ -71,4 +71,8 @@ class Employee extends Authenticatable
             'employee_id',
             'projecy_id');
     }
+
+    public function company(){
+        return $this->belongsTo('App\Models\Company');
+    }
 }

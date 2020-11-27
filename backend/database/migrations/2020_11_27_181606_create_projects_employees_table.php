@@ -20,7 +20,7 @@ class CreateProjectsEmployeesTable extends Migration
             $table->foreign('employee_id')
             ->references('id')
             ->on('employees')
-            ->onDelete('cascade');;
+            ->onDelete('cascade');
 
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')
