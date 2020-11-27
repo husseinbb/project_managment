@@ -25,11 +25,8 @@ class CompanyController extends Controller
     public function getCompanyById($id){
 
         $company = Company::find($id);
-
-        $user = Auth::user();
-        dd($user);
         
-        //$this->authorize('view',$company);
+        $this->authorize('view',$company);
     	return response()->json($company);
     }
 }

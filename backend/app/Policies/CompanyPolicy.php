@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Auth;
 
 class CompanyPolicy
 {
@@ -31,7 +32,8 @@ class CompanyPolicy
     public function view(Employee $employee, Company $company)
     {
         //
-        return $employee->company_id!==$company->id;
+        //$employee=Employee::find(Auth::user()->id);
+        return $employee->company_id===$company->id;
 
     }
 
