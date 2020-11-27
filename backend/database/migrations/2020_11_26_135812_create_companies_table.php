@@ -18,11 +18,11 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('location');
             
-            $table->unsignedBigInteger('manager_id');
-            $table->foreign('manager_id')
-            ->references('id')
-            ->on('managers');
-            $table->unique('manager_id');
+            // $table->unsignedBigInteger('manager_id');
+            // $table->foreign('manager_id')
+            // ->references('id')
+            // ->on('employees');
+            // $table->unique('manager_id');
 
             $table->timestamps();
         });
