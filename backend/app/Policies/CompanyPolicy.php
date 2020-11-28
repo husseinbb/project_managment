@@ -32,7 +32,6 @@ class CompanyPolicy
     public function view(Employee $employee, Company $company)
     {
         //
-        //$employee=Employee::find(Auth::user()->id);
         return $employee->company_id===$company->id;
 
     }
