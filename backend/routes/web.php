@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProjectController;
+
 
 
 /*
@@ -23,5 +25,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/getCompany/{id}',[CompanyController::class,'getCompanyById']);
+// Route::get('/getCompany/{id}',[CompanyController::class,'getCompanyById']);
+
+
+// Route::post('/addProject',[ProjectController::class,'addProject']);
 
