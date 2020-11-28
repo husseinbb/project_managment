@@ -22,7 +22,6 @@
     "reactstrap": "^8.7.1",
     "web-vitals": "^0.2.4"
   },
-  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

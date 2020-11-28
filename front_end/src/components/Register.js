@@ -67,11 +67,13 @@ class Register extends Component {
             });
         }
         var payload={
-            "email":this.state.email,
-            "password":this.state.password,
-            "fullname":this.state.fullname,
-            "level":1
+            'name':this.state.fullname,
+            'email':this.state.email,
+            'password':this.state.password,
+            'password_confirmation':this.state.password
           }
+
+          //console.log(payload)
 
        axios.defaults.withCredentials = true;
        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response =>{

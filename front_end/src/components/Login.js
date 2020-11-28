@@ -61,9 +61,12 @@ handleSubmit(event) {
             password:this.state.password
           }
 
+          console.log(this.state.email,"",this.state.password);
+
+
        axios.defaults.withCredentials = true;
        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response =>{
-            axios.get('http://localhost:8000/api/getProject/1').then(res =>{
+            axios.post('http://localhost:8000/login',payload).then(res =>{
                 console.log(res.data);
             })
        });
