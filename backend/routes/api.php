@@ -4,7 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\MessageController;
+use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\EmployeeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +23,12 @@ use App\Http\Controllers\EmployeeController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Broadcast::routes(['middleware' => ['auth:sanctum']]);
+
+Route::middleware('auth:sanctum')->get('/messages', [App\Http\Controllers\MessageController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/messages', [App\Http\Controllers\MessageController::class, 'store']);
 
 Route::post('/addEmployee',[EmployeeController::class,'addEmployee']);
 Route::get('/getEmployees',[EmployeeController::class,'getAllEmployees']);

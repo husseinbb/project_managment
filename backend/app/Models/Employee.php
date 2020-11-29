@@ -76,4 +76,8 @@ class Employee extends Authenticatable
     public function company(){
         return $this->belongsTo('App\Models\Company');
     }
+
+    public function messages() {
+        return $this->hasMany(Message::class);
+    }
 }
