@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Sidenavbar from './Sidebar';
 import Navbar from './Navbar';
-import ReactPaginate from 'react-paginate';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class NewEmployee extends Component {
@@ -40,10 +38,14 @@ class NewEmployee extends Component {
             
           }
 
-        axios.defaults.withCredentials = true;
-        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
-            axios.post('http://localhost:8000/api/addEmployee', payload).then(res => {
-                this.getAllEmployee()
+
+            axios.post('/api/addEmployee', payload).then(res => {
+                this.setState({list: [...this.state.list, payload]})
+                this.setState({ fullname:'',
+                                email:'',
+                                password:'',
+                                level:'',
+                                });
 
             })
                 .catch(error => {
@@ -51,33 +53,26 @@ class NewEmployee extends Component {
                         console.log(error.response);
                     }
                 });
-
-        });
 
     }
-    getAllEmployee(){
-            axios.get('/api/user').then(res => {
+
+    getAllEmployee=()=>{
+
+
                 this.setState({
                     list: res.data,
-                });
-                
-
-
+                });                
             })
                 .catch(error => {
                     if (error.response) {
                         console.log(error.response);
                     }
                 });
-
 
     }
 
 
     render() {
-        // if(!localStorage.getItem('name')){
-        //     return( <Redirect to={'/login'} /> )
-        // }
 
         return (
             <div>
@@ -93,15 +88,38 @@ class NewEmployee extends Component {
                                 <form onSubmit={this.handleSubmit}>
                                     <div class="form-inline">
                                         <label for="fullname">FullName   </label>
-                                        <input type="text" id="fullname" placeholder="Full name" name="fullname" onChange={this.handlechangeall} />
+                                        <input 
+                                            type="text" id="fullname"   
+                                            placeholder="Full name" 
+                                            name="fullname" 
+                                            value={this.state.fullname}
+                                            onChange={this.handlechangeall} />
                                         <label for="Email">Email   </label>
-                                        <input type="email" id="email" name="email" placeholder="Enter email" onChange={this.handlechangeall} />
+                                        <input 
+                                            type="email" 
+                                            id="email" 
+                                            name="email" 
+                                            placeholder="Enter email" 
+                                            value={this.state.email}
+                                            onChange={this.handlechangeall} />
                                         </div>
                                         <div class="form-inline">
                                         <label for="password">Password</label>
-                                        <input type="text" id="password" placeholder="Enter password" name="password" onChange={this.handlechangeall} />
+                                        <input 
+                                            type="text" 
+                                            id="password" 
+                                            placeholder="Enter password" 
+                                            name="password"
+                                            value={this.state.password} 
+                                            onChange={this.handlechangeall} />
                                         <label for="level">Level </label>
-                                        <input type="text" id="level" placeholder="Enter level" name="level" onChange={this.handlechangeall} />
+                                        <input 
+                                            type="text" 
+                                            id="level" 
+                                            placeholder="Enter level" 
+                                            name="level" 
+                                            value={this.state.level}
+                                            onChange={this.handlechangeall} />
                                         <button class="button button5">+</button>
                                     </div>
 
@@ -121,22 +139,22 @@ class NewEmployee extends Component {
                                     </thead>
                                     <tbody>
                                                         
-                                                        {
-                                                            this.state.list.map(function(item, i){
-                                                                return <React.Fragment>
-                                                                            <tr>
-                                                                                
-                                                                                <td  key={i}>{item.name}</td>
-                                                                                <td  key={i}>{item.email}</td>
-                                                                                <td  key={i}>{item.level}</td>
-                                                                                
-                                                                            </tr>
-                                                                        </React.Fragment>  
+                                        {
+                                            this.state.list.map(function(item, i){
+                                                return <React.Fragment>
+                                                            <tr>
+                                                                
+                                                                <td  key={i}>{item.name}</td>
+                                                                <td  key={i}>{item.email}</td>
+                                                                <td  key={i}>{item.level}</td>
+                                                                
+                                                            </tr>
+                                                        </React.Fragment>  
 
-                                                            })
-                                                        }
+                                            })
+                                        }
                                                         
-                                                    </tbody>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
