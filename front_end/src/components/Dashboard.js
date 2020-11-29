@@ -3,6 +3,7 @@ import Sidenavbar from './Sidebar';
 
 import { Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
+import Chat from './Chat';
 
 class Dashboard extends Component {
     constructor() {
@@ -24,6 +25,7 @@ class Dashboard extends Component {
 
                     <Navbar />
                     <Sidenavbar />
+                    {/* <Chat/> */}
                     <div className="main">
 
                         <div className="main-content">
