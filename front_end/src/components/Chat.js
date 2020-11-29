@@ -2,7 +2,7 @@ import React from 'react'
 import Echo from 'laravel-echo';
 import Axios from 'axios';
 
-export default function Test() {
+export default function Chat() {
     const [message, setMessage] = React.useState({ message: ''})
     const [chat, setChat] = React.useState([])
 

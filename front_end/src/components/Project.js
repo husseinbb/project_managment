@@ -63,8 +63,8 @@ class Project extends Component {
               }
     
            axios.defaults.withCredentials = true;
-           axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response =>{
-                axios.post('http://localhost:8000/api/addProject',payload).then(res =>
+           axios.get('/sanctum/csrf-cookie').then(response =>{
+                axios.post('/api/addProject',payload).then(res =>
                         
                         {
                             alert('record inserted');

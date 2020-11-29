@@ -75,9 +75,9 @@ class Register extends Component {
 
           //console.log(payload)
 
-       axios.defaults.withCredentials = true;
-       axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response =>{
-            axios.post('http://localhost:8000/register',payload).then(res =>{
+       //axios.defaults.withCredentials = true;
+       axios.get('/sanctum/csrf-cookie').then(response =>{
+            axios.post('/register',payload).then(res =>{
                 console.log(res.data);
             })
        });
