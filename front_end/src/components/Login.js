@@ -9,6 +9,7 @@ class Login extends Component {
     this.state = {
                     email: '',
                     password:'',
+                    name:'',
                     emialErr: '',
                     passwordErr: '',
                     status: '',
@@ -53,7 +54,7 @@ handleSubmit(event) {
             this.setState({
                 status: '',
                 
-               
+                redirect:true
             });
           }
           var payload={
@@ -68,6 +69,11 @@ handleSubmit(event) {
        axios.get('/sanctum/csrf-cookie').then(response =>{
             axios.post('/login',payload).then(res =>{
                 console.log(res.data);
+                
+                this.state({
+                  redirect:true,
+                  name:res.data.name
+                })
             })
        });
        this.setState({redirect:true});
@@ -78,7 +84,7 @@ handleSubmit(event) {
   render(){
     if(this.state.redirect === true  ){
       return( 
-     localStorage.setItem('name',this.state.email),
+     localStorage.setItem('name',this.state.name),
       <Redirect to={'/dashboard'} /> 
       )
   }

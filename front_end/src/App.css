@@ -67,6 +67,7 @@ html,body,body *{
     }
     
     
+    
     #wrapper .mainnav {
       -webkit-transition: all 0.3s ease-in-out;
       -moz-transition: all 0.3s ease-in-out;
@@ -416,9 +417,31 @@ p{
   
   .form-inline {
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-end;
   }
 }
-.tableproj{
-  padding-left: 100px;
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+  height:100%;
+}
+.center th{
+  background-color: #00162b;
+  color: #fff;
+  font-size: 22pt;
+  text-align: center;
+
+}
+.center td{
+  color:#00162b;
+  font-size: 18pt;
+  text-align: center;
+
+}
+.btn{
+  float: right;
+  border: 2px solid #00162b;
+  color: #fff;
+  background-color: #155b9c80;
 }

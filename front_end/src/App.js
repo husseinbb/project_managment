@@ -8,7 +8,13 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Project from './components/Project';
 import Navbar from './components/Navbar';
-import NewEmployee from './components/NewEmployee';
+
+
+import Employee from './components/NewEmployee';
+import Task from './components/Task';
+//import Chat from './components/Chat';
+
+
 
 
 
@@ -24,6 +30,8 @@ function App() {
         <Route path="/register" component={Register}/>
         <Route path="/dashboard" component={Dashboard}/>
         <Route path="/project" component={Project}/>
+        <Route path="/employee" component={Employee} />
+        <Route path="/task" component={Task} />
         <Route path="/sidenavbar" component={Sidenavbar} />
         <Route path="/navbar" component={Navbar}/>
         <Route path="/logout" component={Logout}/>

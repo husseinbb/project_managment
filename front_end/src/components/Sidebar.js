@@ -20,7 +20,7 @@ class Sidenavbar extends Component{
 
         return (
             <div>
-            <Sidebar bgColor='black' >
+            <Sidebar bgColor='black' isCollapsed={false} >
                 <br/>
                 <br/>
               <p className="sidep"> Project Management</p>
@@ -34,7 +34,7 @@ class Sidenavbar extends Component{
               </Item>
               <br/>
               <Item bgColor='black'>
-              <NavLink to="/" ><Icon><i className="fas fa-info"/></Icon>
+              <NavLink to="/task" ><Icon><i className="fas fa-info"/></Icon>
                 Tasks</NavLink>
               </Item>
               <br/>
@@ -44,7 +44,7 @@ class Sidenavbar extends Component{
               </Item>
               <br/>
               <Item bgColor='black'>
-              <NavLink to="/" ><Icon><i className="far fa-user"/></Icon>
+              <NavLink to="/employee" ><Icon><i className="far fa-user"/></Icon>
                 Employee</NavLink>
               </Item>
               <Item bgColor='black'>
