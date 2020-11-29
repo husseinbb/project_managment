@@ -70,10 +70,7 @@ handleSubmit(event) {
                 console.log(res.data);
             })
        });
-     
-
-          
-          
+           
             
 }
  
