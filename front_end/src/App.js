@@ -8,7 +8,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Project from './components/Project';
 import Navbar from './components/Navbar';
-//import Chat from './components/Chat';
+import NewEmployee from './components/NewEmployee';
 
 
 
@@ -27,6 +27,7 @@ function App() {
         <Route path="/sidenavbar" component={Sidenavbar} />
         <Route path="/navbar" component={Navbar}/>
         <Route path="/logout" component={Logout}/>
+        <Route path="/NewEmployee" component={NewEmployee}/>
         
         </Switch>  
         

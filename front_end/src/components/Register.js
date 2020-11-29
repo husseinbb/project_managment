@@ -26,7 +26,7 @@ class Register extends Component {
     handleSubmit(event) {
         event.preventDefault();
         var error = [];
-        if (this.state.fullname == '') {
+        if (this.state.fullname === '') {
             this.setState({
                 emialErr: 'Email can not be empty.',
             });
@@ -36,7 +36,7 @@ class Register extends Component {
                 emialErr: '',
             });
         }
-        if (this.state.email == '') {
+        if (this.state.email === '') {
             this.setState({
                 emialErr: 'Email can not be empty.',
             });
@@ -47,7 +47,7 @@ class Register extends Component {
             });
         }
 
-        if (this.state.password == '') {
+        if (this.state.password === '') {
             this.setState({
                 passwordErr: 'Password can not be empty.',
             });
@@ -81,14 +81,15 @@ class Register extends Component {
                 console.log(res.data);
             })
        });
+       this.setState({redirect:true});
 
 
     }
 
     render() {
-        //     if(this.state.redirect == true  ){
-        //       return( <Redirect to={'/dashboard'} /> )
-        //   }
+            if(this.state.redirect === true  ){
+              return( <Redirect to={'/dashboard'} /> )
+          }
 
         return (
             <body className
@@ -105,7 +106,7 @@ class Register extends Component {
                             <input type="text" id="fullname" name="fullname" onChange={this.handlechangeall} />
                             <p>{this.state.emialErr}</p>
 
-                            <label >UserName</label>
+                            <label >Email</label>
                             <input type="text" id="email" name="email" onChange={this.handlechangeall} />
                             <p>{this.state.emialErr}</p>
 

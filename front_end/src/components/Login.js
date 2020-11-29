@@ -70,6 +70,7 @@ handleSubmit(event) {
                 console.log(res.data);
             })
        });
+       this.setState({redirect:true});
            
             
 }
@@ -94,7 +95,7 @@ handleSubmit(event) {
         <form id='loginform' onSubmit={this.handleSubmit} >
           
             
-            <label >UserName</label>
+            <label >Email</label>
             <input type="text" id="email" name="email" onChange={this.handlechangeall}/>
             <p>{ this.state.emialErr }</p>
             
