@@ -16,7 +16,7 @@ class CompanyController extends Controller
         $arr=[
     		'name'=>$request->name,
     		'location'=>$request->location,
-    		'manager_id'=>$request->manager_id,
+    		//'manager_id'=>$request->manager_id,
     	];
     	Company::create($arr);
     	return response()->json($arr);
