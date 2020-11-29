@@ -62,20 +62,21 @@ handleSubmit(event) {
             'password':this.state.password
           }
 
-          console.log(this.state.email,"",this.state.password);
+          //console.log(this.state.email,"",this.state.password);
 
 
        //axios.defaults.withCredentials = true;
        axios.get('/sanctum/csrf-cookie').then(response =>{
             axios.post('/login',payload).then(res =>{
-                console.log(res.data);
+                //console.log(res);
                 
-                this.state({
+                this.setState({
                   redirect:true,
-                  name:res.data.name
+                  //name:res.data.name
                 })
             })
        });
+       this.setState({redirect:true});
            
             
 }
@@ -100,7 +101,7 @@ handleSubmit(event) {
         <form id='loginform' onSubmit={this.handleSubmit} >
           
             
-            <label >UserName</label>
+            <label >Email</label>
             <input type="text" id="email" name="email" onChange={this.handlechangeall}/>
             <p>{ this.state.emialErr }</p>
             

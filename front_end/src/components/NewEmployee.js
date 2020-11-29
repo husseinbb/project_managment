@@ -56,8 +56,7 @@ class NewEmployee extends Component {
 
     }
     getAllEmployee(){
-        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
-            axios.get('http://localhost:8000/api/getAllEmployees').then(res => {
+            axios.get('/api/user').then(res => {
                 this.setState({
                     list: res.data,
                 });
@@ -71,7 +70,7 @@ class NewEmployee extends Component {
                     }
                 });
 
-        });
+
     }
 
 
