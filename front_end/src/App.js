@@ -8,6 +8,10 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Project from './components/Project';
 import Navbar from './components/Navbar';
+import Task from './components/Task';
+import Form from './components/Form';
+import List from './components/List';
+import ListItem from './components/ListItem';
 
 
 
@@ -22,6 +26,10 @@ function App() {
         <Route path="/register" component={Register}/>
         <Route path="/dashboard" component={Dashboard}/>
         <Route path="/project" component={Project}/>
+        <Route path="/task" component={Task}/>
+        <Route path="/form" component={Form}/>
+        <Route path="/list" component={List}/>
+        <Route path="/listitem" component={ListItem}/>
         <Route path="/sidenavbar" component={Sidenavbar} />
         <Route path="/navbar" component={Navbar}/>
         <Route path="/logout" component={Logout}/>

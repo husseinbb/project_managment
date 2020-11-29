@@ -34,7 +34,7 @@ class Sidenavbar extends Component{
               </Item>
               <br/>
               <Item bgColor='black'>
-              <NavLink to="/" ><Icon><i className="fas fa-info"/></Icon>
+              <NavLink to="/task" ><Icon><i className="fas fa-info"/></Icon>
                 Tasks</NavLink>
               </Item>
               <br/>
