@@ -20,6 +20,7 @@
     "react-paginate": "^6.5.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-sidebar": "^3.0.2",
     "react-sidebar-ui": "^1.2.1",
     "reactstrap": "^8.7.1",
     "web-vitals": "^0.2.4"
@@ -47,5 +48,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:8000"
 }

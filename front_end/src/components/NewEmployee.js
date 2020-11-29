@@ -1,148 +1,156 @@
-import React, { Component } from 'react';
-import Sidenavbar from './Sidebar';
-import Navbar from './Navbar';
-import ReactPaginate from 'react-paginate';
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from "react";
+import Sidenavbar from "./Sidebar";
+import Navbar from "./Navbar";
+import ReactPaginate from "react-paginate";
+import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 class NewEmployee extends Component {
-    constructor() {
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+      fullname: "",
+      level: "",
+      status: "",
+      list: [],
+      redirect: false,
+    };
 
-        super();
-        this.state = {
-                        projectname: '',
-                        projectdeadline:'',
-                        status: '',
-                        redirect:false,
-                    };
-    
-        this.handleSubmit = this.handleSubmit.bind(this);
-      }
-      handlechangeall = (event) =>{
-        this.setState ( { [event.target.name] :event.target.value  } )
-    }
-    
-    handleSubmit(event) {
-        event.preventDefault();
-        var error = [];
-            if(this.state.email == ''){
-                this.setState({
-                    emialErr: 'Email can not be empty.',
-                });
-                error.push("Email error");
-            }else{
-                this.setState({
-                    emialErr: '',
-                });
-            }
-    
-            if(this.state.password == ''){
-                this.setState({
-                    passwordErr: 'Password can not be empty.',
-                });
-                error.push("Password error");
-            }else{
-                this.setState({
-                    passwordErr: '',
-                });
-            }
-    
-            if(error.length > 0){
-                return;
-            }else{
-                this.setState({
-                    status: '',
-                    
-                   
-                });
-              }
-              var payload={
-                "name":this.state.projectname,
-                "deadline":this.state.projectdeadline
-              }
-    
-           axios.defaults.withCredentials = true;
-           axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response =>{
-                axios.post('http://localhost:8000/api/addProject',payload).then(res =>
-                        
-                        {
-                            refresh();
-                            
-                    })
-                    .catch(error => {
-                        if (error.response) {
-                            console.log(error.response);
-                          }
-                    });
-            
-                });
-           
-         
-    
-    function refresh(){
-        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response =>{
-                axios.post('http://localhost:8000/api/addProject',payload).then(res =>
-                        
-                        {
-                            this.state({
-                                redirect:true
-                            });
-                            
-                    })
-                    .catch(error => {
-                        if (error.response) {
-                            console.log(error.response);
-                          }
-                    });
-            
-                });
-    }
-              
-                
-    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handlechangeall = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  componentDidMount() {
+    this.getAllEmployee();
+  }
 
+  handleSubmit(event) {
+    event.preventDefault();
 
-    render() {
-        // if(!localStorage.getItem('name')){
-        //     return( <Redirect to={'/login'} /> )
-        // }
+    var payload = {
+      name: this.state.fullname,
+      email: this.state.email,
+      password: this.state.password,
+      level: this.state.level,
+    };
 
-        return (
-            <div>
-                <div id="wrapper">
+    axios.defaults.withCredentials = true;
+    axios.get("http://localhost:8000/sanctum/csrf-cookie").then((response) => {
+      axios
+        .post("http://localhost:8000/api/addEmployee", payload)
+        .then((res) => {
+          this.getAllEmployee();
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response);
+          }
+        });
+    });
+  }
+  getAllEmployee() {
+    axios.get("http://localhost:8000/sanctum/csrf-cookie").then((response) => {
+      axios
+        .get("http://localhost:8000/api/getAllEmployees")
+        .then((res) => {
+          this.setState({
+            list: res.data,
+          });
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response);
+          }
+        });
+    });
+  }
 
+  render() {
+    // if(!localStorage.getItem('name')){
+    //     return( <Redirect to={'/login'} /> )
+    // }
 
-                    <Navbar />
-                    <Sidenavbar />
-                    <div className="main">
-
-                        <div className="main-content">
-                            <div>
-                                <form class="form-inline" onSubmit={this.handleSubmit}>
-                                   
-                                    <label for="projectname">Project Name </label>
-                                    <input type="text" id="projectname" placeholder="Enter project name" name="projectname" onChange={this.handlechangeall} />
-                                        <label for="projectdeadline">Deadline </label>
-                                        <input type="date" id="projectdeadline"  name="projectdeadline" onChange={this.handlechangeall} />
-                                            
-                                        <button class="button button5">+</button>
-                                             </form>
-                            </div>
-
-                                        <div>
-                                            <table border="1" >
-
-                                            </table>
-                                        </div>
-                        </div>
-
-
-                    </div>
-                            </div>
-                        </div>
-        )
-    }
+    return (
+      <div>
+        <div id="wrapper">
+          <Navbar />
+          <Sidenavbar />
+          <div className="main">
+            <div className="main-content">
+              <div>
+                <form onSubmit={this.handleSubmit}>
+                  <div class="form-inline">
+                    <label for="fullname">FullName </label>
+                    <input
+                      type="text"
+                      id="fullname"
+                      placeholder="Full name"
+                      name="fullname"
+                      onChange={this.handlechangeall}
+                    />
+                    <label for="Email">Email </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Enter email"
+                      onChange={this.handlechangeall}
+                    />
+                  </div>
+                  <div class="form-inline">
+                    <label for="password">Password</label>
+                    <input
+                      type="text"
+                      id="password"
+                      placeholder="Enter password"
+                      name="password"
+                      onChange={this.handlechangeall}
+                    />
+                    <label for="level">Level </label>
+                    <input
+                      type="text"
+                      id="level"
+                      placeholder="Enter level"
+                      name="level"
+                      onChange={this.handlechangeall}
+                    />
+                    <button class="button button5">+</button>
+                  </div>
+                </form>
+              </div>
+              <br />
+              <br />
+              <div>
+                <table border="1" className="center">
+                  <thead>
+                    <th>Full name</th>
+                    <th>Email</th>
+                    <th>Level</th>
+                  </thead>
+                  <tbody>
+                    {this.state.list.map(function (item, i) {
+                      return (
+                        <React.Fragment>
+                          <tr>
+                            <td key={i}>{item.name}</td>
+                            <td key={i}>{item.email}</td>
+                            <td key={i}>{item.level}</td>
+                          </tr>
+                        </React.Fragment>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
-
 
 export default NewEmployee;

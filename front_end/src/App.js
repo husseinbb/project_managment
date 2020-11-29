@@ -1,35 +1,34 @@
-import React from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
-import Main from './components/main';
-import Logout from './components/Logout';
-import Dashboard from './components/Dashboard';
-import Sidenavbar from './components/Sidebar';
-import Login from './components/Login';
-import Register from './components/Register';
-import Project from './components/Project';
-import Navbar from './components/Navbar';
+import React from "react";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 
+import history from "./utils/history";
 
+import Main from "./components/main";
+import Dashboard from "./components/Dashboard";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Project from "./components/Project";
+import CompanyMain from "./components/CompanyMain";
+import Employee from "./components/NewEmployee";
+import Task from "./components/Task";
+//import Chat from './components/Chat';
 
-
+import { IsUserRedirect, ProtectedRoute } from "./utils/Routes";
 function App() {
+  const loggedIn = JSON.parse(window.localStorage.getItem("loggedIn"));
+
   return (
-    <div className="App">
-      <Router>      
+    <Router history={history}>
+      <Switch>
         <Route exact path="/" component={Main} />
-        <Route path="/main" component={Main} />
-        <Route path="/login" component={Login}/>
-        <Route path="/register" component={Register}/>
-        <Route path="/dashboard" component={Dashboard}/>
-        <Route path="/project" component={Project}/>
-        <Route path="/sidenavbar" component={Sidenavbar} />
-        <Route path="/navbar" component={Navbar}/>
-        <Route path="/logout" component={Logout}/>
-        
-       
-      
-      </Router>
-    </div>
+        <Route path="/companyMain" component={CompanyMain} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <ProtectedRoute path="/dashboard">
+          <Dashboard />
+        </ProtectedRoute>
+      </Switch>
+    </Router>
   );
 }
 

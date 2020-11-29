@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class Main extends Component {
+class CompanyMain extends Component {
   constructor() {
     super();
 
@@ -15,20 +15,20 @@ class Main extends Component {
       <div className="contain" id="main">
         <div className="login-register-wrapper">
           <div className="nav-buttons">
-            <h1 className="form-title text-frozen">Project Manager</h1>
+            <h1 className="form-title text-frozen">Company Form</h1>
           </div>
           <div className="form-group">
             <form>
               <h4>
-                <Link className="form-text" to="/companyMain">
-                  Company
+                <Link className="form-text" to="/register">
+                  Register
                 </Link>
                 <br />
                 <br />
               </h4>
               <h4>
                 <Link className="form-text" to="/login">
-                  Employee
+                  Login
                 </Link>
                 <br />
                 <br />
@@ -41,4 +41,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default CompanyMain;
