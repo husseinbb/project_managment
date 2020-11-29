@@ -67,6 +67,7 @@ html,body,body *{
     }
     
     
+    
     #wrapper .mainnav {
       -webkit-transition: all 0.3s ease-in-out;
       -moz-transition: all 0.3s ease-in-out;
@@ -416,9 +417,10 @@ p{
   
   .form-inline {
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-end;
   }
 }
-.tableproj{
-  padding-left: 100px;
+.center {
+  margin-left: auto;
+  margin-right: auto;
 }

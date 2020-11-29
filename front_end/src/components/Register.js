@@ -79,6 +79,9 @@ class Register extends Component {
        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response =>{
             axios.post('http://localhost:8000/register',payload).then(res =>{
                 console.log(res.data);
+                this.state={
+                    redirect:true
+                }
             })
        });
 
@@ -86,9 +89,10 @@ class Register extends Component {
     }
 
     render() {
-        //     if(this.state.redirect == true  ){
-        //       return( <Redirect to={'/dashboard'} /> )
-        //   }
+            if(this.state.redirect == true  ){
+              return( localStorage.setItem('name',this.state.email),
+              <Redirect to={'/dashboard'} />  )
+          }
 
         return (
             <body className

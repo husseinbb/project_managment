@@ -5,14 +5,13 @@ import { Redirect } from 'react-router-dom';
 class Logout extends Component{
     constructor() {
         super();
-        localStorage.removeItem('name');
-        localStorage.removeItem('token');
+        localStorage.clear();
     }
 
 
     render(){
         if(!localStorage.getItem('name')){
-            return( <Redirect to={'/main'} /> )
+            return( <Redirect to={'/login'} /> )
         }
 
         return (

@@ -9,6 +9,7 @@ class Login extends Component {
     this.state = {
                     email: '',
                     password:'',
+                    name:'',
                     emialErr: '',
                     passwordErr: '',
                     status: '',
@@ -68,6 +69,9 @@ handleSubmit(event) {
        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response =>{
             axios.post('http://localhost:8000/login',payload).then(res =>{
                 console.log(res.data);
+                this.state({
+                  redirect:true
+                })
             })
        });
      
