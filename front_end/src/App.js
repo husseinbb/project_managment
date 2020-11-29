@@ -9,9 +9,11 @@ import Register from './components/Register';
 import Project from './components/Project';
 import Navbar from './components/Navbar';
 
+
 import Employee from './components/NewEmployee';
 import Task from './components/Task';
 //import Chat from './components/Chat';
+
 
 
 
@@ -33,6 +35,7 @@ function App() {
         <Route path="/sidenavbar" component={Sidenavbar} />
         <Route path="/navbar" component={Navbar}/>
         <Route path="/logout" component={Logout}/>
+        <Route path="/NewEmployee" component={NewEmployee}/>
         
         </Switch>  
         

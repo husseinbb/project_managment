@@ -47,14 +47,14 @@ class Sidenavbar extends Component{
               <NavLink to="/employee" ><Icon><i className="far fa-user"/></Icon>
                 Employee</NavLink>
               </Item>
+              <Item bgColor='black'>
+              <NavLink to="/NewEmployee" ><Icon><i className="far fa-user"/></Icon>
+                NewEmployee</NavLink>
+              </Item>
               <br/>
               <Item bgColor='black'>
               <NavLink to="/logout" ><Icon><i className="fas fa-sign-out-alt"/></Icon>
                 Logout</NavLink>
-              </Item>
-              <Item bgColor='black'>
-              <NavLink to="/Chat" ><Icon><i className="fas fa-sign-out-alt"/></Icon>
-                Chat</NavLink>
               </Item>
               </nav>
              
