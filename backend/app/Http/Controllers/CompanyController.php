@@ -12,21 +12,23 @@ class CompanyController extends Controller
 
 
 
-    public function addCompany(Request $request){
-        $arr=[
-    		'name'=>$request->name,
-    		'location'=>$request->location,
-    		//'manager_id'=>$request->manager_id,
-    	];
-    	Company::create($arr);
-    	return response()->json($arr);
+    public function addCompany(Request $request)
+    {
+        $arr = [
+            'name' => $request->name,
+            'location' => $request->location,
+            //'manager_id'=>$request->manager_id,
+        ];
+        Company::create($arr);
+        return response()->json($arr);
     }
 
-    public function getCompanyById($id){
+    public function getCompanyById($id)
+    {
 
         $company = Company::find($id);
-        
-        $this->authorize('view',$company);
-    	return response()->json($company);
+
+        $this->authorize('view', $company);
+        return response()->json($company);
     }
 }

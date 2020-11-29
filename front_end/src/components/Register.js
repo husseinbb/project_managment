@@ -1,143 +1,115 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
+const Register = () => {
+  const history = useHistory();
 
-class Register extends Component {
-    constructor() {
-        super();
-        this.state = {
-            email: '',
-            password: '',
-            fullname: '',
-            level: '',
-            emialErr: '',
-            passwordErr: '',
-            status: '',
-            redirect: false,
-        };
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailErro] = useState("");
+  const [passwordErr, setPasswordError] = useState("");
 
-        this.handleSubmit = this.handleSubmit.bind(this);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    var error = [];
+    if (name === "") {
+      setNameError("Name can not be empty.");
+      error.push("Email error");
+    } else {
+      setNameError("");
     }
-    handlechangeall = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        var error = [];
-        if (this.state.fullname === '') {
-            this.setState({
-                emialErr: 'Email can not be empty.',
-            });
-            
-        } else {
-            this.setState({
-                emialErr: '',
-            });
-        }
-        if (this.state.email === '') {
-            this.setState({
-                emialErr: 'Email can not be empty.',
-            });
-            error.push("Email error");
-        } else {
-            this.setState({
-                emialErr: '',
-            });
-        }
-
-        if (this.state.password === '') {
-            this.setState({
-                passwordErr: 'Password can not be empty.',
-            });
-            error.push("Password error");
-        } else {
-            this.setState({
-                passwordErr: '',
-            });
-        }
-
-        if (error.length > 0) {
-            return;
-        } else {
-            this.setState({
-                status: '',
-                redirect: true
-            });
-        }
-        var payload={
-            'name':this.state.fullname,
-            'email':this.state.email,
-            'password':this.state.password,
-            'password_confirmation':this.state.password
-          }
-
-          //console.log(payload)
-
-       //axios.defaults.withCredentials = true;
-       axios.get('/sanctum/csrf-cookie').then(response =>{
-            axios.post('/register',payload).then(res =>{
-                console.log(res.data);
-                this.state={
-                    redirect:true
-                }
-            })
-       });
-       this.setState({redirect:true});
-
-
+    if (email === "") {
+      setEmailErro("Email can not be empty.");
+      error.push("Email error");
+    } else {
+      setEmailErro("");
     }
 
-    render() {
-
-            if(this.state.redirect == true  ){
-              return( localStorage.setItem('name',this.state.fullname),
-              <Redirect to={'/dashboard'} />  )
-          }
-
-        return (
-            <body className
-                ="contain">
-                <div className="login-register-wrapper">
-                    <div className="nav-buttons">
-                        <button id="loginBtn" >Create New Account</button>
-
-                    </div>
-                    <div className="form-group">
-                        <form id='loginform' onSubmit={this.handleSubmit} >
-
-                            <label >Full Name</label>
-                            <input type="text" id="fullname" name="fullname" onChange={this.handlechangeall} />
-                            <p>{this.state.emialErr}</p>
-
-                            <label >Email</label>
-                            <input type="text" id="email" name="email" onChange={this.handlechangeall} />
-                            <p>{this.state.emialErr}</p>
-
-                            <br />
-
-                            <label>Password</label>
-                            <input type="password" id="password" name="password" onChange={this.handlechangeall} />
-                            <p>{this.state.passwordErr}</p>
-
-                            <input type="submit" value="submit" className='submit' />
-
-
-                        </form>
-
-
-                    </div>
-
-                    <a href="/main" className="back">Back</a>
-                </div>
-            </body>
-        );
+    if (password === "") {
+      setPasswordError("Password can not be empty.");
+      error.push("Password error");
+    } else {
+      setPasswordError("");
     }
 
+    if (error.length > 0) {
+      return;
+    }
+    const payload = {
+      name,
+      email,
+      password,
+      password,
+      password_confirmation: password,
+    };
 
-}
+    //axios.defaults.withCredentials = true;
+    axios.get(`/sanctum/csrf-cookie`).then((response) => {
+      console.log(response);
+      axios.post("/register", payload).then((res) => {
+        console.log(res.data);
+        window.localStorage.setItem("loggedIn", true);
+        history.push("/dashboard");
+      });
+    });
+  };
+  return (
+    <div className="contain" id="register">
+      <div className="login-register-wrapper">
+        <div className="nav-buttons">
+          <h1 className="form-title text-frozen">Registration Form</h1>
+        </div>
+        <div className="form-group">
+          <form id="loginform" onSubmit={handleSubmit}>
+            <label>Full Name</label>
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+            <p>{nameError}</p>
 
+            <label>Email Address</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <p>{emailError}</p>
 
+            <br />
+
+            <label>Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            <p>{passwordErr}</p>
+            <div className="form-actions">
+              <input type="submit" value="submit" className="submit" />
+
+              <Link to="/" className="back">
+                Back To Menu
+              </Link>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Register;

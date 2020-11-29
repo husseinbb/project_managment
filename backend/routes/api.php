@@ -24,17 +24,18 @@ use App\Http\Controllers\TodoTaskController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', 
+Route::middleware('auth:sanctum')->get(
+    '/user',
 
-// function (){
-//     return 2;
-// }
+    // function (){
+    //     return 2;
+    // }
 
-function (Request $request) {
+    function (Request $request) {
 
-    return $request->user();
-}
- );
+        return $request->user();
+    }
+);
 
 // Route::get('/user', 
 
@@ -49,38 +50,43 @@ function (Request $request) {
 // );
 
 
+//Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('auth:sanctum')->group(function () {
 
-    Route::post('/addEmployee',[EmployeeController::class,'addEmployee']);
-    Route::get('/getAllEmployees',[EmployeeController::class,'getAllEmployees']);
+    Route::post('/addEmployee', [EmployeeController::class, 'addEmployee']);
+    Route::get('/getAllEmployees', [EmployeeController::class, 'getAllEmployees']);
 
     Route::get('/messages', [MessageController::class, 'index']);
     Route::post('/messages', [MessageController::class, 'store']);
 
-    Route::post('/addCompany',[CompanyController::class,'addCompany']);
-    Route::get('/getCompany/{id}',[CompanyController::class,'getCompanyById']);
+    Route::post('/addCompany', [CompanyController::class, 'addCompany']);
+    Route::get('/getCompany/{id}', [CompanyController::class, 'getCompanyById']);
 
-    Route::post('/addProject',[ProjectController::class,'addProject']);
-    Route::get('/getProject/{id}',[ProjectController::class,'getProjectById']);
-    Route::get('/getAllProjects',[ProjectController::class,'getAllProjects']);
-  
-    Route::post('/createTodoList',[TodoListController::class,'createList']);
-    Route::post('/deleteTodoList',[TodoListController::class,'deleteList']);
-    Route::get('/deleteCompletedTasks/{list}',[TodoListController::class,'deleteCompletedTasks']);
+    Route::post('/addProject', [ProjectController::class, 'addProject']);
+    Route::get('/getProject/{id}', [ProjectController::class, 'getProjectById']);
+    Route::get('/getAllProjects', [ProjectController::class, 'getAllProjects']);
+
+    Route::post('/createTodoList', [TodoListController::class, 'createList']);
+    Route::post('/deleteTodoList', [TodoListController::class, 'deleteList']);
+    Route::get('/deleteCompletedTasks/{list}', [TodoListController::class, 'deleteCompletedTasks']);
 
 
-    Route::post('/createTodoTask',[TodoTaskController::class,'createTask']);
-    Route::get('/changeTodoTask/{id}',[TodoTaskController::class,'changeTaskStatus']);
-    Route::get('/deleteTodoTask/{id}',[TodoTaskController::class,'deleteTask']);
-
+    Route::post('/createTodoTask', [TodoTaskController::class, 'createTask']);
+    Route::get('/changeTodoTask/{id}', [TodoTaskController::class, 'changeTaskStatus']);
+    Route::get('/deleteTodoTask/{id}', [TodoTaskController::class, 'deleteTask']);
 });
 
 
 
 
 
+Route::post('/addCompany', [CompanyController::class, 'addCompany']);
+Route::get('/getCompany/{id}', [CompanyController::class, 'getCompanyById']);
 
+Route::post('/addProject', [ProjectController::class, 'addProject']);
+Route::get('/getProject/{id}', [ProjectController::class, 'getProjectById']);
+Route::get('/getAllProjects', [ProjectController::class, 'getAllProjects']);

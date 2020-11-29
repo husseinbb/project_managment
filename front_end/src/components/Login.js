@@ -1,132 +1,94 @@
-import React, { Component} from 'react';
-import {Redirect} from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Link, useHistory, Redirect } from "react-router-dom";
+import axios from "axios";
 
+const Login = (props) => {
+  const history = useHistory();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailErr, setEmailErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
 
-class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-                    email: '',
-                    password:'',
-                    name:'',
-                    emialErr: '',
-                    passwordErr: '',
-                    status: '',
-                    loader: 'none',
-                    redirect:false,
-                };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handlechangeall = (event) =>{
-    this.setState ( { [event.target.name] :event.target.value  } )
-}
-
-handleSubmit(event) {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     var error = [];
-        if(this.state.email === ''){
-            this.setState({
-                emialErr: 'Email can not be empty.',
-            });
-            error.push("Email error");
-        }else{
-            this.setState({
-                emialErr: '',
-            });
-        }
+    if (email === "") {
+      setEmailErr("Email can not be empty.");
+      error.push("Email error");
+    } else {
+      setEmailErr("");
+    }
 
-        if(this.state.password === ''){
-            this.setState({
-                passwordErr: 'Password can not be empty.',
-            });
-            error.push("Password error");
-        }else{
-            this.setState({
-                passwordErr: '',
-            });
-        }
+    if (password === "") {
+      setPasswordErr("Password can not be empty.");
+      error.push("Password error");
+    } else {
+      setPasswordErr("");
+    }
 
-        if(error.length > 0){
-            return;
-        }else{
-            this.setState({
-                status: '',
-                
-                redirect:true
-            });
-          }
-          var payload={
-            'email':this.state.email,
-            'password':this.state.password
-          }
+    if (error.length > 0) {
+      return;
+    }
+    const payload = {
+      email: email,
+      password: password,
+    };
 
-          //console.log(this.state.email,"",this.state.password);
-
-
-       //axios.defaults.withCredentials = true;
-       axios.get('/sanctum/csrf-cookie').then(response =>{
-            axios.post('/login',payload).then(res =>{
-                //console.log(res);
-                
-
-                this.setState({redirect:true});
-
-            })
-       });
-
-           
-            
-}
- 
-  render(){
-    if(this.state.redirect === true  ){
-      return( 
-     localStorage.setItem('name',this.state.name),
-      <Redirect to={'/dashboard'} /> 
-      )
-  }
+    //axios.defaults.withCredentials = true;
+    axios.get("/sanctum/csrf-cookie").then((response) => {
+      console.log(response);
+      axios.post("/login", payload).then((res) => {
+        console.log("logged in ", res);
+        window.localStorage.setItem("loggedIn", true);
+        history.push("/dashboard");
+      });
+    });
+  };
 
   return (
-    <body className
-    ="contain">
-    <div className="login-register-wrapper">
-      <div className="nav-buttons">
-        <button  id="loginBtn" >Login</button>
-        
-      </div>
-      <div className="form-group">
-        <form id='loginform' onSubmit={this.handleSubmit} >
-          
-            
-            <label >Email</label>
-            <input type="text" id="email" name="email" onChange={this.handlechangeall}/>
-            <p>{ this.state.emialErr }</p>
-            
-            <br/>
-            
+    <div className="contain" id="login">
+      <div className="login-register-wrapper">
+        <div className="nav-buttons">
+          <h1 className="form-title text-frozen">Login Form</h1>
+        </div>
+        <div className="form-group">
+          <form id="loginform" onSubmit={handleSubmit}>
+            <label>Email Address</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <p>{emailErr}</p>
+
+            <br />
+
             <label>Password</label>
-            <input type="password" id="password" name="password" onChange={this.handlechangeall}/>
-            <p>{ this.state.passwordErr }</p>
-            
-            <input type="submit" value="submit" className='submit'  />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            <p>{passwordErr}</p>
 
-          
-        </form>
+            <div className="form-actions">
+              <input type="submit" value="submit" className="submit" />
 
-        
+              <Link to="/" className="back">
+                Back To Menu
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
-    
-      <a href="/main" className="back">Back</a>
     </div>
-    </body>
   );
-  }
-
-  
-}
-
-
+};
 
 export default Login;
