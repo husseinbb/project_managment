@@ -90,7 +90,7 @@ class Register extends Component {
 
     render() {
             if(this.state.redirect == true  ){
-              return( localStorage.setItem('name',this.state.email),
+              return( localStorage.setItem('name',this.state.fullname),
               <Redirect to={'/dashboard'} />  )
           }
 

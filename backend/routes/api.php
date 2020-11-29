@@ -4,6 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\MessageController;
+use Illuminate\Support\Facades\Broadcast;
+use App\Http\Controllers\EmployeeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +25,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Broadcast::routes(['middleware' => ['auth:sanctum']]);
+
+Route::middleware('auth:sanctum')->get('/messages', [App\Http\Controllers\MessageController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/messages', [App\Http\Controllers\MessageController::class, 'store']);
+
+Route::post('/addEmployee',[EmployeeController::class,'addEmployee']);
+Route::get('/getEmployees',[EmployeeController::class,'getAllEmployees']);
+
+
 Route::post('/addCompany',[CompanyController::class,'addCompany']);
 Route::get('/getCompany/{id}',[CompanyController::class,'getCompanyById']);
 
 Route::post('/addProject',[ProjectController::class,'addProject']);
 Route::get('/getProject/{id}',[ProjectController::class,'getProjectById']);
+Route::get('/getAllProjects',[ProjectController::class,'getAllProjects']);
+
 

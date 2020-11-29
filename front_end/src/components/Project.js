@@ -15,6 +15,7 @@ class Project extends Component {
             status: '',
             redirect: false,
             id: 2,
+            list: [],
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +23,10 @@ class Project extends Component {
     handlechangeall = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
+    componentDidMount() {
+		this.getAllProject();
+    }
+
 
     handleSubmit(event) {
         event.preventDefault();
@@ -65,7 +70,8 @@ class Project extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
             axios.post('http://localhost:8000/api/addProject', payload).then(res => {
-                alert('record inserted');
+                this.getAllProject();
+                
 
             })
                 .catch(error => {
@@ -76,17 +82,30 @@ class Project extends Component {
 
         });
 
+    
+    }
+    getAllProject(){
+        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
+            axios.get('http://localhost:8000/api/getAllProjects').then(res => {
+                this.setState({
+                    list: res.data,
+                });
+                
 
 
+            })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response);
+                    }
+                });
 
-
-
-
+        });
     }
 
 
     render() {
-
+        
         return (
             <div>
                 <div id="wrapper">
@@ -117,13 +136,25 @@ class Project extends Component {
                                     <thead>
                                         <th>Project name</th>
                                         <th>Deadline</th>
-                                        <th>Action</th>
+                                        
                                     </thead>
                                     <tbody>
-                                        <tr></tr>
-                                        <tr></tr>
-                                        <tr></tr>
-                                    </tbody>
+                                                        
+                                                        {
+                                                            this.state.list.map(function(item, i){
+                                                                return <React.Fragment>
+                                                                            <tr>
+                                                                                
+                                                                                <td  key={i}>{item.name}</td>
+                                                                                <td  key={i}>{item.deadline}</td>
+                                                                                
+                                                                            </tr>
+                                                                        </React.Fragment>  
+
+                                                            })
+                                                        }
+                                                        
+                                                    </tbody>
                                 </table>
                             </div>
                         </div>

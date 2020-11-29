@@ -15,6 +15,7 @@ class NewEmployee extends Component {
             fullname: '',
             level: '',
             status: '',
+            list: [],
             redirect: false,
         };
 
@@ -23,6 +24,10 @@ class NewEmployee extends Component {
     handlechangeall = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
+    componentDidMount() {
+		this.getAllEmployee();
+    }
+
 
     handleSubmit(event) {
         event.preventDefault();
@@ -32,13 +37,13 @@ class NewEmployee extends Component {
             'email':this.state.email,
             'password':this.state.password,
             'level':this.state.level,
-            'password_confirmation':this.state.password
+            
           }
 
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
-            axios.post('http://localhost:8000/api/register', payload).then(res => {
-                alert("Done");
+            axios.post('http://localhost:8000/api/addEmployee', payload).then(res => {
+                this.getAllEmployee()
 
             })
                 .catch(error => {
@@ -49,11 +54,24 @@ class NewEmployee extends Component {
 
         });
 
+    }
+    getAllEmployee(){
+        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
+            axios.get('http://localhost:8000/api/getAllEmployees').then(res => {
+                this.setState({
+                    list: res.data,
+                });
+                
 
 
+            })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response);
+                    }
+                });
 
-
-
+        });
     }
 
 
@@ -92,10 +110,34 @@ class NewEmployee extends Component {
 
                                 </form>
                             </div>
+                            <br/><br/>
+                            <div >
+                                <table border="1" className="center">
 
-                            <div>
-                                <table border="1" >
+                                    <thead>
+                                        <th>Full name</th>
+                                        <th>Email</th>
+                                        <th>Level</th>
+                                        
+                                    </thead>
+                                    <tbody>
+                                                        
+                                                        {
+                                                            this.state.list.map(function(item, i){
+                                                                return <React.Fragment>
+                                                                            <tr>
+                                                                                
+                                                                                <td  key={i}>{item.name}</td>
+                                                                                <td  key={i}>{item.email}</td>
+                                                                                <td  key={i}>{item.level}</td>
+                                                                                
+                                                                            </tr>
+                                                                        </React.Fragment>  
 
+                                                            })
+                                                        }
+                                                        
+                                                    </tbody>
                                 </table>
                             </div>
                         </div>

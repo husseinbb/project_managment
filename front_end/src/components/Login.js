@@ -54,7 +54,7 @@ handleSubmit(event) {
             this.setState({
                 status: '',
                 
-               
+                redirect:true
             });
           }
           var payload={
@@ -69,22 +69,21 @@ handleSubmit(event) {
        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response =>{
             axios.post('http://localhost:8000/login',payload).then(res =>{
                 console.log(res.data);
+                
                 this.state({
-                  redirect:true
+                  redirect:true,
+                  name:res.data.name
                 })
             })
        });
-     
-
-          
-          
+           
             
 }
  
   render(){
     if(this.state.redirect == true  ){
       return( 
-     localStorage.setItem('name',this.state.email),
+     localStorage.setItem('name',this.state.name),
       <Redirect to={'/dashboard'} /> 
       )
   }

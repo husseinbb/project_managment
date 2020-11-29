@@ -18,7 +18,8 @@ class Project extends Model
         return $this->belongsToMany(
             Employee::class,
             'projects_employees',
-            'project_id',
-            'employee_id');
+            // 'project_id',
+            // 'employee_id'
+        );
     }
 }
