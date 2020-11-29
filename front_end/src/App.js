@@ -35,7 +35,6 @@ function App() {
         <Route path="/sidenavbar" component={Sidenavbar} />
         <Route path="/navbar" component={Navbar}/>
         <Route path="/logout" component={Logout}/>
-        <Route path="/NewEmployee" component={NewEmployee}/>
         
         </Switch>  
         

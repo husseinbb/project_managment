@@ -27,23 +27,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
-<<<<<<< HEAD
-Route::middleware('auth:sanctum')->get('/messages', [App\Http\Controllers\MessageController::class, 'index']);
-Route::middleware('auth:sanctum')->post('/messages', [App\Http\Controllers\MessageController::class, 'store']);
-=======
-Route::middleware('auth:sanctum')->get('/messages', [MessageController::class, 'index']);
-Route::middleware('auth:sanctum')->post('/messages', [MessageController::class, 'store']);
->>>>>>> 986c5cdf42f20c747e81377c59427e8d45f766bf
+Route::middleware('auth:sanctum')->group(function(){
 
-Route::post('/addEmployee',[EmployeeController::class,'addEmployee']);
-Route::get('/getEmployees',[EmployeeController::class,'getAllEmployees']);
+    Route::post('/addEmployee',[EmployeeController::class,'addEmployee']);
+    Route::get('/getAllEmployees',[EmployeeController::class,'getAllEmployees']);
 
+    Route::get('/messages', [MessageController::class, 'index']);
+    Route::post('/messages', [MessageController::class, 'store']);
 
-Route::post('/addCompany',[CompanyController::class,'addCompany']);
-Route::get('/getCompany/{id}',[CompanyController::class,'getCompanyById']);
+    Route::post('/addCompany',[CompanyController::class,'addCompany']);
+    Route::get('/getCompany/{id}',[CompanyController::class,'getCompanyById']);
 
-Route::post('/addProject',[ProjectController::class,'addProject']);
-Route::get('/getProject/{id}',[ProjectController::class,'getProjectById']);
-Route::get('/getAllProjects',[ProjectController::class,'getAllProjects']);
+    Route::post('/addProject',[ProjectController::class,'addProject']);
+    Route::get('/getProject/{id}',[ProjectController::class,'getProjectById']);
+    Route::get('/getAllProjects',[ProjectController::class,'getAllProjects']);
 
+});
 

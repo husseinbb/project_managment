@@ -70,10 +70,7 @@ handleSubmit(event) {
             axios.post('/login',payload).then(res =>{
                 console.log(res.data);
                 
-                this.state({
-                  redirect:true,
-                  name:res.data.name
-                })
+                this.setState({redirect:true});
             })
        });
        this.setState({redirect:true});
