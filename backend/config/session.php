@@ -158,7 +158,7 @@ return [
     */
 
     'domain' => env('SESSION_DOMAIN', null),
-    //'domain' => '.domain.com',
+    // 'domain' => '.domain.com',
 
     /*
     |--------------------------------------------------------------------------

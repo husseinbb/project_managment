@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Sidenavbar from "./Sidebar";
 import Navbar from "./Navbar";
-import ReactPaginate from "react-paginate";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 class NewEmployee extends Component {
@@ -27,7 +25,7 @@ class NewEmployee extends Component {
     this.getAllEmployee();
   }
 
-  handleSubmit(event) {
+  /*   handleSubmit(event) {
     event.preventDefault();
 
     var payload = {
@@ -48,33 +46,43 @@ class NewEmployee extends Component {
           if (error.response) {
             console.log(error.response);
           }
-        });
-    });
-  }
-  getAllEmployee() {
-    axios.get("http://localhost:8000/sanctum/csrf-cookie").then((response) => {
-      axios
-        .get("http://localhost:8000/api/getAllEmployees")
-        .then((res) => {
-          this.setState({
-            list: res.data,
-          });
-        })
-        .catch((error) => {
-          if (error.response) {
-            console.log(error.response);
-          }
-        });
-    });
-  }
+
+
+            axios.post('/api/addEmployee', payload).then(res => {
+                this.setState({list: [...this.state.list, payload]})
+                this.setState({ fullname:'',
+                                email:'',
+                                password:'',
+                                level:'',
+                                });
+
+            })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response);
+                    }
+                });
+
+    }
+
+    getAllEmployee=()=>{
+
+
+                this.setState({
+                    list: res.data,
+                });                
+            })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response);
+                    }
+                });
+
+    } */
 
   render() {
-    // if(!localStorage.getItem('name')){
-    //     return( <Redirect to={'/login'} /> )
-    // }
-
     return (
-      <div>
+      <>
         <div id="wrapper">
           <Navbar />
           <Sidenavbar />
@@ -89,6 +97,7 @@ class NewEmployee extends Component {
                       id="fullname"
                       placeholder="Full name"
                       name="fullname"
+                      value={this.state.fullname}
                       onChange={this.handlechangeall}
                     />
                     <label for="Email">Email </label>
@@ -97,6 +106,7 @@ class NewEmployee extends Component {
                       id="email"
                       name="email"
                       placeholder="Enter email"
+                      value={this.state.email}
                       onChange={this.handlechangeall}
                     />
                   </div>
@@ -107,6 +117,7 @@ class NewEmployee extends Component {
                       id="password"
                       placeholder="Enter password"
                       name="password"
+                      value={this.state.password}
                       onChange={this.handlechangeall}
                     />
                     <label for="level">Level </label>
@@ -115,6 +126,7 @@ class NewEmployee extends Component {
                       id="level"
                       placeholder="Enter level"
                       name="level"
+                      value={this.state.level}
                       onChange={this.handlechangeall}
                     />
                     <button class="button button5">+</button>
@@ -148,7 +160,7 @@ class NewEmployee extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
