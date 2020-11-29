@@ -55,8 +55,10 @@ class NewEmployee extends Component {
                 });
 
     }
+
     getAllEmployee=()=>{
-            axios.get('/api/getAllEmployees').then(res => {
+
+
                 this.setState({
                     list: res.data,
                 });                
@@ -66,6 +68,7 @@ class NewEmployee extends Component {
                         console.log(error.response);
                     }
                 });
+
     }
 
 

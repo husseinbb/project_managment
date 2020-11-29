@@ -7,6 +7,10 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\TodoListController;
+use App\Http\Controllers\TodoTaskController;
+
+
 
 
 /*
@@ -20,12 +24,34 @@ use App\Http\Controllers\EmployeeController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', 
+
+// function (){
+//     return 2;
+// }
+
+function (Request $request) {
+
     return $request->user();
-});
+}
+ );
+
+// Route::get('/user', 
+
+// function (){
+//     return '2';
+// }
+
+// function (Request $request) {
+
+//     return $request->employee();
+// }
+// );
+
 
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
+
 
 Route::middleware('auth:sanctum')->group(function(){
 
@@ -41,6 +67,20 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/addProject',[ProjectController::class,'addProject']);
     Route::get('/getProject/{id}',[ProjectController::class,'getProjectById']);
     Route::get('/getAllProjects',[ProjectController::class,'getAllProjects']);
+  
+    Route::post('/createTodoList',[TodoListController::class,'createList']);
+    Route::post('/deleteTodoList',[TodoListController::class,'deleteList']);
+    Route::get('/deleteCompletedTasks/{list}',[TodoListController::class,'deleteCompletedTasks']);
+
+
+    Route::post('/createTodoTask',[TodoTaskController::class,'createTask']);
+    Route::get('/changeTodoTask/{id}',[TodoTaskController::class,'changeTaskStatus']);
+    Route::get('/deleteTodoTask/{id}',[TodoTaskController::class,'deleteTask']);
 
 });
+
+
+
+
+
 

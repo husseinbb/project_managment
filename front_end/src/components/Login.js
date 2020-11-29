@@ -62,18 +62,20 @@ handleSubmit(event) {
             'password':this.state.password
           }
 
-          console.log(this.state.email,"",this.state.password);
+          //console.log(this.state.email,"",this.state.password);
 
 
        //axios.defaults.withCredentials = true;
        axios.get('/sanctum/csrf-cookie').then(response =>{
             axios.post('/login',payload).then(res =>{
-                console.log(res.data);
+                //console.log(res);
                 
+
                 this.setState({redirect:true});
+
             })
        });
-       this.setState({redirect:true});
+
            
             
 }
