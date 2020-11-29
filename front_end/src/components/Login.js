@@ -26,7 +26,7 @@ class Login extends Component {
 handleSubmit(event) {
     event.preventDefault();
     var error = [];
-        if(this.state.email == ''){
+        if(this.state.email === ''){
             this.setState({
                 emialErr: 'Email can not be empty.',
             });
@@ -37,7 +37,7 @@ handleSubmit(event) {
             });
         }
 
-        if(this.state.password == ''){
+        if(this.state.password === ''){
             this.setState({
                 passwordErr: 'Password can not be empty.',
             });
@@ -58,16 +58,16 @@ handleSubmit(event) {
             });
           }
           var payload={
-            email:this.state.email,
-            password:this.state.password
+            'email':this.state.email,
+            'password':this.state.password
           }
 
           console.log(this.state.email,"",this.state.password);
 
 
-       axios.defaults.withCredentials = true;
-       axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response =>{
-            axios.post('http://localhost:8000/login',payload).then(res =>{
+       //axios.defaults.withCredentials = true;
+       axios.get('/sanctum/csrf-cookie').then(response =>{
+            axios.post('/login',payload).then(res =>{
                 console.log(res.data);
                 
                 this.state({
@@ -81,7 +81,7 @@ handleSubmit(event) {
 }
  
   render(){
-    if(this.state.redirect == true  ){
+    if(this.state.redirect === true  ){
       return( 
      localStorage.setItem('name',this.state.name),
       <Redirect to={'/dashboard'} /> 

@@ -52,6 +52,10 @@ class Sidenavbar extends Component{
               <NavLink to="/logout" ><Icon><i className="fas fa-sign-out-alt"/></Icon>
                 Logout</NavLink>
               </Item>
+              <Item bgColor='black'>
+              <NavLink to="/Chat" ><Icon><i className="fas fa-sign-out-alt"/></Icon>
+                Chat</NavLink>
+              </Item>
               </nav>
              
             </Sidebar>

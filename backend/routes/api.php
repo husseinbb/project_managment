@@ -27,8 +27,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
+<<<<<<< HEAD
 Route::middleware('auth:sanctum')->get('/messages', [App\Http\Controllers\MessageController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/messages', [App\Http\Controllers\MessageController::class, 'store']);
+=======
+Route::middleware('auth:sanctum')->get('/messages', [MessageController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/messages', [MessageController::class, 'store']);
+>>>>>>> 986c5cdf42f20c747e81377c59427e8d45f766bf
 
 Route::post('/addEmployee',[EmployeeController::class,'addEmployee']);
 Route::get('/getEmployees',[EmployeeController::class,'getAllEmployees']);
