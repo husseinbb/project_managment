@@ -17,16 +17,22 @@ use App\Http\Controllers\ProjectController;
 |
 */
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Expose-Headers: Content-Length, X-JSON");
+header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: *");
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('dashboard');   
+ 
 
 // Route::get('/getCompany/{id}',[CompanyController::class,'getCompanyById']);
 
 
 // Route::post('/addProject',[ProjectController::class,'addProject']);
-

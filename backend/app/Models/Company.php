@@ -12,7 +12,7 @@ class Company extends Model
     protected $fillable = [
         'name',
         'location',
-        'manager_id',
+        //  'manager_id',
     ];
 
 
@@ -20,6 +20,4 @@ class Company extends Model
     {
         return $this->hasMany('App\Models\Employee');
     }
-
-
 }
