@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'database'),
+    'driver' => env('SESSION_DRIVER', 'cookie'),
 
     
 
@@ -158,7 +158,7 @@ return [
     */
 
     'domain' => env('SESSION_DOMAIN', null),
-    //'domain' => '.domain.com',
+    // 'domain' => '.domain.com',
 
     /*
     |--------------------------------------------------------------------------
