@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
-    //
-
+    
 
     public function addEmployee(Request $request){
         $arr=[
@@ -24,6 +23,10 @@ class EmployeeController extends Controller
     	];
     	Employee::create($arr);
     	return response()->json($arr);
+    }
+    public function getAllEmployees(){
+        $employees=Employee::all()->toArray();
+    	return response()->json($employees);
     }
 
     // public function getAllEmployees($id){

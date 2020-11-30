@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Sidenavbar from './Sidebar';
 import Navbar from './Navbar';
-import ReactPaginate from 'react-paginate';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Project extends Component {
-    constructor() {
+    constructor(props) {
 
-        super();
+        super(props);
         this.state = {
             projectname: '',
             projectdeadline: '',
@@ -24,7 +23,7 @@ class Project extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
     componentDidMount() {
-		this.getAllProject();
+        this.getAllProject();
     }
 
 
@@ -68,10 +67,10 @@ class Project extends Component {
         }
 
         axios.defaults.withCredentials = true;
-        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
-            axios.post('http://localhost:8000/api/addProject', payload).then(res => {
+        axios.get('/sanctum/csrf-cookie').then(response => {
+            axios.post('/api/addProject', payload).then(res => {
                 this.getAllProject();
-                
+
 
             })
                 .catch(error => {
@@ -82,15 +81,16 @@ class Project extends Component {
 
         });
 
-    
+
     }
-    getAllProject(){
+
+    getAllProject() {
         axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
             axios.get('http://localhost:8000/api/getAllProjects').then(res => {
                 this.setState({
                     list: res.data,
                 });
-                
+
 
 
             })
@@ -105,7 +105,7 @@ class Project extends Component {
 
 
     render() {
-        
+
         return (
             <div>
                 <div id="wrapper">
@@ -136,25 +136,25 @@ class Project extends Component {
                                     <thead>
                                         <th>Project name</th>
                                         <th>Deadline</th>
-                                        
+
                                     </thead>
                                     <tbody>
-                                                        
-                                                        {
-                                                            this.state.list.map(function(item, i){
-                                                                return <React.Fragment>
-                                                                            <tr>
-                                                                                
-                                                                                <td  key={i}>{item.name}</td>
-                                                                                <td  key={i}>{item.deadline}</td>
-                                                                                
-                                                                            </tr>
-                                                                        </React.Fragment>  
 
-                                                            })
-                                                        }
-                                                        
-                                                    </tbody>
+                                        {
+                                            this.state.list.map(function (item, i) {
+                                                return <React.Fragment>
+                                                    <tr >
+
+                                                        <td key={i} ><Link to="/showproject" className="atd">{item.name}</Link></td>
+                                                        <td key={i}>{item.deadline}</td>
+
+                                                    </tr>
+                                                </React.Fragment>
+
+                                            })
+                                        }
+
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

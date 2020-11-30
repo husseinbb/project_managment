@@ -61,7 +61,8 @@ Route::middleware('auth:sanctum')->post('/messages', [MessageController::class, 
 // >>>>>>> 986c5cdf42f20c747e81377c59427e8d45f766bf
 
 Route::post('/addEmployee',[EmployeeController::class,'addEmployee']);
-Route::get('/getEmployees/{id}',[EmployeeController::class,'getAllEmployees']);
+// Route::get('/getEmployees/{id}',[EmployeeController::class,'getAllEmployees']);
+Route::get('/getEmployees',[EmployeeController::class,'getAllEmployees']);
 
 
 Route::post('/addCompany',[CompanyController::class,'addCompany']);

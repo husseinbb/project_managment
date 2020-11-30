@@ -15,7 +15,7 @@ class TodoListController extends Controller
     public function createList(Request $request){
         $arr=[
     		'project_id'=>$request->project_id,
-            'admin_id'=>$request->admin_id,
+            'admin_id'=>Auth::user()->id,
     	];
     	TodoList::create($arr);
     	return response()->json($arr);

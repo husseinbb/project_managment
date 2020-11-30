@@ -12,10 +12,10 @@ import Task from './components/Task';
 import Form from './components/Form';
 import List from './components/List';
 import ListItem from './components/ListItem';
-
+import ShowProject from './components/ShowProject';
 
 import Employee from './components/NewEmployee';
-import Task from './components/Task';
+
 //import Chat from './components/Chat';
 
 
@@ -36,7 +36,7 @@ function App() {
         <Route path="/project" component={Project}/>
 
         <Route path="/employee" component={Employee} />
-       
+        <Route path="/showproject" component={ShowProject}/>
         <Route path="/task" component={Task}/>
         <Route path="/form" component={Form}/>
         <Route path="/list" component={List}/>
@@ -45,7 +45,7 @@ function App() {
         <Route path="/sidenavbar" component={Sidenavbar} />
         <Route path="/navbar" component={Navbar}/>
         <Route path="/logout" component={Logout}/>
-        <Route path="/NewEmployee" component={NewEmployee}/>
+        
         
         </Switch>  
         

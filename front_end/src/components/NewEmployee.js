@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Sidenavbar from './Sidebar';
 import Navbar from './Navbar';
-import ReactPaginate from 'react-paginate';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class NewEmployee extends Component {
@@ -22,8 +20,9 @@ class NewEmployee extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handlechangeall = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
-    }
+        this.setState({ [event.target.name]: event.target.value });
+        
+      }
     componentDidMount() {
 		this.getAllEmployee();
     }
@@ -39,10 +38,12 @@ class NewEmployee extends Component {
             'level':this.state.level,
             
           }
+          alert(this.state.fullname+""+this.state.email+""+this.state.password+""+this.state.level);
 
         axios.defaults.withCredentials = true;
-        axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
-            axios.post('http://localhost:8000/api/addEmployee', payload).then(res => {
+        axios.get('/sanctum/csrf-cookie').then(response => {
+            axios.post('/api/addEmployee', payload).then(res => {
+                alert('Done');
                 this.getAllEmployee()
 
             })
@@ -57,9 +58,9 @@ class NewEmployee extends Component {
     }
     getAllEmployee(){
             axios.get('/api/user').then(res => {
-                this.setState({
+                this.setState={
                     list: res.data,
-                });
+                };
                 
 
 

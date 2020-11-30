@@ -7,6 +7,7 @@ class Register extends Component {
     constructor() {
         super();
         this.state = {
+            id:'',
             email: '',
             password: '',
             fullname: '',
@@ -19,8 +20,8 @@ class Register extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handlechangeall = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
+    handlechangeall = (event) =>{
+        this.setState ( { [event.target.name] :event.target.value  } )
     }
 
     handleSubmit(event) {
@@ -79,8 +80,10 @@ class Register extends Component {
        axios.get('/sanctum/csrf-cookie').then(response =>{
             axios.post('/register',payload).then(res =>{
                 console.log(res.data);
+                
                 this.state={
-                    redirect:true
+                    redirect:true,
+                    
                 }
             })
        });
@@ -93,6 +96,7 @@ class Register extends Component {
 
             if(this.state.redirect == true  ){
               return( localStorage.setItem('name',this.state.fullname),
+                
               <Redirect to={'/dashboard'} />  )
           }
 

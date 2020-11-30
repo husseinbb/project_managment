@@ -43,12 +43,9 @@ class Sidenavbar extends Component{
                 My Projects</NavLink>
               </Item>
               <br/>
+              
               <Item bgColor='black'>
               <NavLink to="/employee" ><Icon><i className="far fa-user"/></Icon>
-                Employee</NavLink>
-              </Item>
-              <Item bgColor='black'>
-              <NavLink to="/NewEmployee" ><Icon><i className="far fa-user"/></Icon>
                 NewEmployee</NavLink>
               </Item>
               <br/>
