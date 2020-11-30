@@ -26,9 +26,9 @@ class EmployeeController extends Controller
     	return response()->json($arr);
     }
 
-    // public function getAllEmployees($id){
-    //    // $id=Auth::user()->id;
-    //     $employees=Employee::where('manager_id',$id)->get()->toArray();
-    // 	return response()->json($id);
-    // }
+    public function getAllEmployees(){
+        $id=Auth::user()->id;
+        $employees=Employee::where('manager_id',$id)->get()->toArray();
+    	return response()->json($employees);
+    }
 }

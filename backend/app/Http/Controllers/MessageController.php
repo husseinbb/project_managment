@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Events\MessageSentEvent;
 use App\Models\Message;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
@@ -16,18 +17,24 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
+        $id=Auth::user()->id;
+        $employee = Employee::find($id);
+        $value = $request->message;
 
-        $message = $user->messages()->create([
-            'message' => $request->input('message')
+        // $message = $employee->messages()->create([
+        //     'message' => $value['message'],
+        // ]);
+        $message = Message::create([
+            'message' => $value['message'],
+            'employee_id'=> $id
         ]);
-
+        
         // send event to listeners
-        broadcast(new MessageSentEvent($message, $user))->toOthers();
+        broadcast(new MessageSentEvent($message, $employee))->toOthers();
 
         return [
             'message' => $message,
-            'user' => $user,
+            'user' => $employee
         ];
     }
 }

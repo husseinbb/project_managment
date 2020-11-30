@@ -1,16 +1,22 @@
-import React from 'react'
+
 import Echo from 'laravel-echo';
 import Axios from 'axios';
+import Message from './Message'
+
+import React, { Component } from 'react'
+
 
 export default function Chat() {
     const [message, setMessage] = React.useState({ message: ''})
     const [chat, setChat] = React.useState([])
+    console.log(chat);
 
     React.useEffect(() => {
+
+
         echo.private('chat')
         .listen('MessageSentEvent', (e) => {
-            console.log(e)
-            setChat([...chat,{name:e.user.name, message:e.message.message}])
+            setChat(prevState => [...prevState,{name:e.employee.name, message:e.message.message}])
             
         },[]);           
       });
@@ -24,48 +30,37 @@ export default function Chat() {
         Axios.post('/api/messages', {
             message
         }).then(response => {
-            //setChat([...chat,{name:response.data.user, message:response.data.message.message}])
-            // chat.push({message: response.data.message.message,
-            //             name: response.data.user})
+          setChat(prevState => [...prevState, {name:response.data.user.name, message:response.data.message.message}]);
+
 
         });
-        setMessage('');
-      }
-    
-      const renderChat = () => {
-        return chat.map(({ name, message }, index) => (
-          <div key={index}>
-            <h3>
-              {name}: <span>{message}</span>
-            </h3>
-          </div>
-        ))
+        // setMessage('');
       }
 
+      window.Pusher = require('pusher-js');
+      let echo = new Echo({
+          broadcaster: "pusher",
+          cluster: 'ap2',
+          encrypted: true,
+          key:'f06b56dfd0ad241492b8',
+          authorizer: (channel, options) => {
+              return {
+                  authorize: (socketId, callback) => {
+                      Axios.post('/api/broadcasting/auth', {
+                          socket_id: socketId,
+                          channel_name: channel.name
+                      })
+                      .then(response => {
+                          callback(false, response.data);
+                      })
+                      .catch(error => {
+                          callback(true, error);
+                      });
+                  }
+              };
+          },
+      })
 
-    window.Pusher = require('pusher-js');
-    let echo = new Echo({
-        broadcaster: "pusher",
-        cluster: 'ap2',
-        encrypted: true,
-        key:'f06b56dfd0ad241492b8',
-        authorizer: (channel, options) => {
-            return {
-                authorize: (socketId, callback) => {
-                    Axios.post('/api/broadcasting/auth', {
-                        socket_id: socketId,
-                        channel_name: channel.name
-                    })
-                    .then(response => {
-                        callback(false, response.data);
-                    })
-                    .catch(error => {
-                        callback(true, error);
-                    });
-                }
-            };
-        },
-    })
 
     return (
         <div className="card">
@@ -80,11 +75,11 @@ export default function Chat() {
             label="Message"
           />
         </div>
-        <button>Send Message</button>
+        <input type='submit' value='Send Message'/>
       </form>
       <div >
         <h1>Chat Log</h1>
-        {renderChat()}
+        <Message chat={chat}/>
       </div>
     </div>
     )

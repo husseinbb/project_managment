@@ -57,7 +57,7 @@ class NewEmployee extends Component {
     }
 
     getAllEmployee=()=>{
-
+        axios.get('/api/getAllEmployees').then(res => {
 
                 this.setState({
                     list: res.data,
@@ -89,7 +89,8 @@ class NewEmployee extends Component {
                                     <div class="form-inline">
                                         <label for="fullname">FullName   </label>
                                         <input 
-                                            type="text" id="fullname"   
+                                            type="text" 
+                                            id="fullname"   
                                             placeholder="Full name" 
                                             name="fullname" 
                                             value={this.state.fullname}
@@ -120,7 +121,7 @@ class NewEmployee extends Component {
                                             name="level" 
                                             value={this.state.level}
                                             onChange={this.handlechangeall} />
-                                        <button class="button button5">+</button>
+                                        <button className="button button5">+</button>
                                     </div>
 
 
